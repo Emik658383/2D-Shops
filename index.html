@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2D SHOP — Metro Royale</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background:
+        linear-gradient(rgba(8,10,12,.88), rgba(8,10,12,.96)),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=80");
+    background-size: cover;
+    background-attachment: fixed;
+    color: #eee;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: rgba(10,10,10,.94);
+    border-bottom: 1px solid #3b3b3b;
+    backdrop-filter: blur(8px);
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #e6a93b;
+}
+
+.logo span {
+    color: white;
+}
+
+.balance {
+    background: #181818;
+    border: 1px solid #444;
+    padding: 10px 18px;
+    border-radius: 6px;
+}
+
+.balance b {
+    color: #e6a93b;
+}
+
+.hero {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 7%;
+    background: linear-gradient(90deg, rgba(0,0,0,.9), transparent);
+}
+
+.hero h1 {
+    font-size: clamp(42px, 8vw, 80px);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.hero h1 span {
+    color: #e6a93b;
+}
+
+.hero p {
+    margin-top: 15px;
+    color: #aaa;
+    font-size: 18px;
+}
+
+.shop {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px 80px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+    font-size: 28px;
+    text-transform: uppercase;
+    border-left: 4px solid #e6a93b;
+    padding-left: 12px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(20,20,20,.94);
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: #e6a93b;
+    box-shadow: 0 10px 35px rgba(0,0,0,.5);
+}
+
+.card-image {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #101010;
+    font-size: 65px;
+}
+
+.card-content {
+    padding: 18px;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #888;
+    font-size: 14px;
+    min-height: 35px;
+}
+
+.price {
+    margin: 15px 0;
+    color: #e6a93b;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.buy {
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 5px;
+    background: #e6a93b;
+    color: #111;
+    font-weight: 900;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.buy:hover {
+    background: #ffc75d;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid #333;
+    color: #666;
+}
+
+#notification {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px 20px;
+    background: #191919;
+    border: 1px solid #e6a93b;
+    border-radius: 6px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: .3s;
+}
+
+#notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo"><span>2D</span> SHOP</div>
+
+    <div class="balance">
+        Баланс: <b id="balance">5000</b> 🪙     </div>
+</header>
+
+<section class="hero">
+    <h1>METRO <span>SHOP</span></h1>
+    <p>Снаряжение для выживания. Без UC.</p>
+</section>
+
+<main class="shop">
+
+    <h2 class="section-title">Товары</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <div class="card-image">🔫 </div>
+            <div class="card-content">
+                <h3>Штурмовая винтовка</h3>
+                <p>Тактический предмет для коллекции.</p>
+                <div class="price">1200 🪙 </div>
+                <button class="buy" onclick="buyItem('Штурмовая винтовка',1200)">
+                    КУПИТЬ/button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-image">🛡️ </div>
+            <div class="card-content">
+                <h3>Бронежилет</h3>
+                <p>Защитное снаряжение Metro.</p>
+                <div class="price">900 🪙 </div>
+                <button class="buy" onclick="buyItem('Бронежилет',900)">
+                    КУПИТЬ
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-image">🎒 </div>
+            <div class="card-content">
+                <h3>Тактический рюкзак</h3>
+                <p>Предмет для вашего инвентаря.</p>
+                <div class="price">700 🪙 </div>
+                <button class="buy" onclick="buyItem('Тактический рюкзак',700)">
+                    КУПИТЬ
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-image">💎 </div>
+            <div class="card-content">
+                <h3>Редкий предмет</h3>
+                <p>Эксклюзивный предмет магазина 2D.</p>
+                <div class="price">1800 🪙 </div>
+                <button class="buy" onclick="buyItem('Редкий предмет',1800)">
+                    КУПИТЬ
+                </button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    2D SHOP © 2026 — Фанатский магазин
+</footer>
+
+<div id="notification"></div>
+
+<script>
+let balance = 5000;
+
+function buyItem(name, price) {
+
+    const notification = document.getElementById("notification");
+
+    if (balance < price) {
+        notification.textContent = "Недостаточно монет!";
+    } else {
+        balance -= price;
+        document.getElementById("balance").textContent = balance;
+
+        notification.textContent =
+            "✓ Куплено: " + name;
+    }
+
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 2500);
+}
+</script>
+
+</body>
+</html>
